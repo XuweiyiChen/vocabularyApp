@@ -1,57 +1,22 @@
 {
   "name": "vovabularyapp",
   "version": "0.0.1",
-  "author": "XuweiyiChen <62165079+XuweiyiChen@users.noreply.github.com>",
   "description": "An electron-vue project",
-  "license": null,
-  "main": "./dist/electron/main.js",
+  "author": "XuweiyiChen <62165079+XuweiyiChen@users.noreply.github.com>",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
-    "build:dir": "node .electron-vue/build.js && electron-builder --dir",
+    "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter src",
     "build:clean": "cross-env BUILD_TARGET=clean node .electron-vue/build.js",
+    "build:dir": "node .electron-vue/build.js && electron-builder --dir",
     "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
     "dev": "node .electron-vue/dev-runner.js",
-    "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter src",
     "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix src",
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
     "postinstall": "npm run lint:fix"
   },
-  "build": {
-    "productName": "vovabularyapp",
-    "appId": "com.example.yourapp",
-    "directories": {
-      "output": "build"
-    },
-    "files": [
-      "dist/electron/**/*"
-    ],
-    "dmg": {
-      "contents": [
-        {
-          "x": 410,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 130,
-          "y": 150,
-          "type": "file"
-        }
-      ]
-    },
-    "mac": {
-      "icon": "build/icons/icon.icns"
-    },
-    "win": {
-      "icon": "build/icons/icon.ico"
-    },
-    "linux": {
-      "icon": "build/icons"
-    }
-  },
+  "main": "./dist/electron/main.js",
   "dependencies": {
     "axios": "^0.18.0",
     "vue": "^2.5.16",
@@ -96,16 +61,55 @@
     "mini-css-extract-plugin": "0.4.0",
     "multispinner": "^0.2.1",
     "node-loader": "^0.6.0",
+    "sass": "^1.19.0",
+    "sass-loader": "^8.0.0",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
+    "vue-cli-plugin-vuetify": "~2.0.9",
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^15.2.4",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
+    "vuetify-loader": "^1.3.0",
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4",
     "webpack-hot-middleware": "^2.22.2",
     "webpack-merge": "^4.1.3"
-  }
+  },
+  "build": {
+    "productName": "vovabularyapp",
+    "appId": "com.example.yourapp",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "dist/electron/**/*"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "icon": "build/icons/icon.icns"
+    },
+    "win": {
+      "icon": "build/icons/icon.ico"
+    },
+    "linux": {
+      "icon": "build/icons"
+    }
+  },
+  "license": null
 }
