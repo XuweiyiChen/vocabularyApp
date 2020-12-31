@@ -23,7 +23,7 @@
               <v-divider></v-divider>
           
               <v-list nav dense>
-                <v-list-item-group v-model="selectedItem" color="primary">
+                <v-list-item-group v-model= "selectedItem" color="primary">
                   <v-list-item v-for="(item, i) in items" :key="i">
                     <v-list-item-content>
                       <v-list-item-title v-text="item.text"></v-list-item-title>
@@ -51,10 +51,10 @@
                         <v-data-table
                           :headers="headerArray"
                           :items="items[0].vocabs"
-                          :search="search"
-                          :hide-default-header="hideHeaders"
-                          :show-select="showSelect"
-                          :loading="isLoading"
+                          :search= "search"
+                          :hide-default-header= "hideHeaders"
+                          :show-select= "showSelect"
+                          :loading= "isLoading"
                           hide-default-footer
                           item-key="name"
                           class="elevation-1"
@@ -102,7 +102,7 @@
       </v-row>
 
       <v-container class="grey lighten-5">
-        <v-row :justify="space-between">
+        <v-row justify-space-between>
           <!-- <v-col cols="11">
             <v-card height="50px" > -->
               <v-col md="4">
@@ -123,6 +123,13 @@
 
 <script>
   export default {
+    props: {
+      search: true,
+      selectedItem: true,
+      hideHeaders: true,
+      showSelect: true,
+      isLoading: true
+    },
     data () {
       return {
         items: [
