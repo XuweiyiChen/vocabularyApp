@@ -1,35 +1,60 @@
 <template>
-    <v-card height="800px" >
+  <v-card height="800px" >
     <v-navigation-drawer permanent>
-        <v-list>
+      <v-list>
         <v-list-item link>
-            <v-list-item-content>
+          <v-list-item-content>
             <v-list-item-title class="title">
-                Vocab Lists
-                <!-- <v-icon>mdi-heart</v-icon>  ？？ -->
+                Lists
             </v-list-item-title>
-            </v-list-item-content>
-        </v-list-item>
-        </v-list>
+          </v-list-item-content>
 
-        <v-divider></v-divider>
-    
-        <v-list nav dense>
-        <v-list-item-group v-model= "selectedItem" color="primary">
-            <v-list-item v-for="(item, i) in items" :key="i" @contextmenu="show" @mousedown.right="showRight(i)">
-            <v-list-item-content>
-                <v-list-item-title v-text="item"></v-list-item-title>
-            </v-list-item-content>
-            </v-list-item>
+          <v-list-item-content style="height: 0px; position: relative">
+            <v-fab-transition>
+              <v-btn
+                color="black"
+                outlined
+                dark
+                absolute
+                top
+                right
+                fab
+                x-small
+              > +
+                <!-- <v-icon>mdi-plus</v-icon> -->
+              </v-btn>
+            </v-fab-transition>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+
+      <v-divider></v-divider>
+  
+      <v-list nav dense>
+        <v-list-item-group v-model= "selectedItem" color="primary" class="list-group">
+          <!-- <v-list-item v-for="(item, i) in items" :key="i"> -->
+          <!-- <v-list-item v-for="(item, i) in items" :key="i" @contextmenu="show" @mousedown.right="showRight(i)"> -->
+          <!-- <v-list-item-content> -->
+              <!-- <v-list-item-title v-text="item"></v-list-item-title> -->
+            <ul>
+              <li v-for="(item, i) in items" :key="i" v-text="item.text">
+                <div v-show = "item.edit == false">
+                  <label @dblclick = "item.edit = true"> {{item.text}} </label>
+                </div>
+                <input v-show = "item.edit == true" v-model = "item.text"
+                v-on:blur= "item.edit=false; $emit('update')"
+                @keyup.enter = "item.edit=false; $emit('update')">
+              </li>
+            </ul>
+          <!-- </v-list-item-content> -->
+          <!-- </v-list-item> -->
         </v-list-item-group>
-        </v-list>
-        <v-row
-            align="center"
-            justify="space-around"
-        >
-            <v-btn small outlined  color="primary" @click="add">Add</v-btn>
-            <v-btn small outlined id="remove" color="error" @click="remove">Remove</v-btn>
-        </v-row>
+      </v-list>
+      
+      <v-row align="center" justify="space-around">
+          <v-btn small outlined  color="primary" @click="add">Add</v-btn>
+          <v-btn small outlined id="remove" color="error" @click="remove">Remove</v-btn>
+      </v-row>
 
       <v-menu
         v-model="showMenu"
@@ -39,16 +64,13 @@
         offset-y
       >
         <v-list>
-          <v-list-item
-            v-for="(item, index) in itemsForMenu"
-            :key="index"
-          >
-            <v-list-item-title><v-btn @click="clickOnMenu(item)">{{ item }}</v-btn></v-list-item-title>
+          <v-list-item v-for="(item, index) in itemsForMenu" :key="index">
+            <!-- <v-list-item-title><v-btn @click="clickOnMenu(item)" @update-value="updateVal">{{ item }}</v-btn></v-list-item-title> -->
           </v-list-item>
         </v-list>
       </v-menu>
     </v-navigation-drawer>
-    </v-card>
+  </v-card>
 </template>
 
 <script>
@@ -56,9 +78,11 @@ export default {
   data () {
     return {
       selectedItem: 0,
-      items: ['list 1',
-        'list 2',
-        'list 3'
+      editedItem: null,
+      items: [
+        {'text': 'list 1', 'edit': false},
+        {'text': 'list 2', 'edit': false},
+        {'text': 'list 3', 'edit': false}
       ],
       showMenu: false,
       x: 0,
@@ -98,6 +122,9 @@ export default {
     showRight (i) {
       console.log(i)
       this.selectedItem = i
+    },
+    editTodo: function (item) {
+      this.editedItem = item
     }
   }
 }
