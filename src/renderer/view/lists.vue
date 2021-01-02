@@ -114,6 +114,10 @@
       showSelect: true,
       isLoading: true
     },
+    mounted () {
+      // test purpose it will generate a data.json in src/renderer/vocajson
+      this.saveFile()
+    },
     data () {
       return {
         listname: null,

@@ -114,7 +114,7 @@ export default {
         console.log('this.indexValue', item)
         console.log('this.indexValue', this.indexValue)
         // this.indexValue = -1
-        // TODO receive the input from input tag and ewnew the array
+        // TODO receive the input from input tag and renew the array
       }
     },
     showRight (i) {
