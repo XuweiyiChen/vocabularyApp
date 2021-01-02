@@ -11,8 +11,8 @@
             <v-container fluid>
               <v-row>
                 <v-col>
-                  <v-card >
-                    <v-card-text style="height: 700px;" class="lighten-5 text-center">
+                  <v-card>
+                    <v-card-text style="height: 800px;" class="text-center">
                       <v-data-table
                         :headers="headerArray"
                         :items="vocabs"
@@ -30,8 +30,8 @@
                       <template v-slot:activator="{ on, attrs }">    
                         <v-card-text style="height: 50px; position: relative">
                           <!-- <v-fab-transition> -->
-                            <v-btn color="black" fixed outlined dark absolute
-                              bottom right fab x-small v-bind="attrs" v-on="on"> 
+                            <v-btn id="hi" color="teal" fixed dark
+                              bottom right fab small v-bind="attrs" v-on="on"> 
                               +
                               <!-- <v-icon>mdi-plus</v-icon> -->
                             </v-btn>
@@ -40,25 +40,21 @@
                       </template>
 
                       <v-card>
-                        <v-card-title class="headline grey lighten-2">word</v-card-title>
+                        <v-card-title class="subtitle-2 teal lighten-2"> : </v-card-title>
 
                         <v-card-text>  
-                          <v-subheader>Front</v-subheader>
-
-                          <v-col cols="6" sm="6" display:flex>
-                            <v-text-field label="front" placeholder="Placeholder" solo class="shrink">
+                          <v-subheader class="subtitle-1 mt-lg-2">Front</v-subheader>
+<!-- ??mt -->
+                          <v-col cols="6" sm="6" flex>
+                            <v-text-field style="width: 400px;" label="" placeholder="enter text.." outlined class="shrink">
                             </v-text-field>
                           </v-col>
 
-                          <v-subheader>Back</v-subheader>
+                          <v-subheader class="subtitle-1">Back</v-subheader>
 
                           <v-col cols="12" sm="6">
-                            <v-text-field
-                              label="back"
-                              placeholder="Placeholder"
-                              solo
-                              height="100"
-                            ></v-text-field>
+                            <v-text-field style="width: 400px; height=100px;" label="" placeholder="enter text.." outlined class="shrink">
+                            </v-text-field>
                           </v-col>
                         </v-card-text>
                             
@@ -89,6 +85,7 @@
           <v-btn>
             <span>Stat</span>
             <!-- <v-icon>history</v-icon> -->
+            <!-- <v-btn color="teal" dark fab x-small></v-btn> -->
           </v-btn>
           <v-btn>
             <span></span>
@@ -127,10 +124,10 @@
           {front: 'abbreviate', back: '缩写, 缩短', due: '11/11/2020', memory: 'weak'}
         ],
         headerArray: [
-          {text: 'front', align: 'start', sortable: false, value: 'front'},
-          {text: 'back', value: 'back'},
-          {text: 'due', value: 'due'},
-          {text: 'memory', value: 'memory'}
+          {text: 'Front', align: 'start', sortable: false, value: 'front'},
+          {text: 'Back', value: 'back'},
+          {text: 'Due', value: 'due'},
+          {text: 'Memory', value: 'memory'}
         ]
       }
     },
@@ -145,5 +142,7 @@
 </script>
 
 <style>
-
+  #hi {
+    bottom: 80px;
+  }
 </style>
