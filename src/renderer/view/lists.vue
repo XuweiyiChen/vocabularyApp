@@ -4,7 +4,7 @@
       <v-container class="grey lighten-5">
         <v-row no-gutters>
           <v-col cols="3">
-            <vocabList></vocabList>
+            <vocabList @changeList="listnameSet"></vocabList>
           </v-col>
 
           <v-col>
@@ -46,14 +46,14 @@
                           <v-subheader class="subtitle-1 mt-lg-2">Front</v-subheader>
 <!-- ??mt -->
                           <v-col cols="6" sm="6" flex>
-                            <v-text-field style="width: 400px;" label="" placeholder="enter text.." outlined class="shrink">
+                            <v-text-field style="width: 400px;" label="" placeholder="enter text.." outlined class="shrink" v-model="front">
                             </v-text-field>
                           </v-col>
 
                           <v-subheader class="subtitle-1">Back</v-subheader>
 
                           <v-col cols="12" sm="6">
-                            <v-text-field style="width: 400px; height=100px;" label="" placeholder="enter text.." outlined class="shrink">
+                            <v-text-field style="width: 400px; height=100px;" label="" placeholder="enter text.." outlined class="shrink" v-model="back">
                             </v-text-field>
                           </v-col>
                         </v-card-text>
@@ -65,7 +65,7 @@
                           <v-btn
                             color="primary"
                             text
-                            @click="dialog = false"
+                            @click="addWord"
                           >
                             Done
                           </v-btn>
@@ -116,8 +116,13 @@
     },
     data () {
       return {
+        listname: null,
         dialog: false,
         value: 1,
+        front: null,
+        back: null,
+        due: '11/11/2020',
+        memory: 'weak',
         vocabs: [
           {front: 'abash', back: '使尴尬，使羞愧', due: '11/11/2020', memory: 'weak'}, // color icon <--- memory  sort by col
           {front: 'abate', back: '减轻, 减少, 停止', due: '11/11/2020', memory: 'good'},
@@ -132,11 +137,39 @@
       }
     },
     methods: {
-      // getColor (calories) {
-      //   if (calories > 400) return 'red'
-      //   else if (calories > 200) return 'orange'
-      //   else return 'green'
-      // }
+      saveFile () {
+        const fs = require('fs')
+        let data = JSON.stringify(this.vocabs)
+        console.log(data)
+        try {
+          fs.writeFileSync('./src/renderer/vocajson/data.json', data)
+        } catch (e) {
+          console.log(e)
+        }
+      },
+      readFile () {
+        const fs = require('fs')
+        let rawdata = fs.readFileSync('./src/renderer/vocajson/data.json')
+        let student = JSON.parse(rawdata)
+        console.log(student)
+      },
+      addWord () {
+        console.log(this.front)
+        console.log(this.back)
+        this.dialog = false
+        let sentence = {front: this.front, back: this.back, due: this.due, memory: this.memory}
+        // console.log(sentence)
+        let newvocabs = this.vocabs
+        newvocabs[3] = sentence
+        // let data = JSON.parse(sentence)
+        console.log(this.vocabs)
+        this.$set(this.vocabs, newvocabs)
+        // console.log(data)
+      },
+      listnameSet (newlistName) {
+        this.listname = newlistName
+        console.log(this.listname)
+      }
     }
   }
 </script>

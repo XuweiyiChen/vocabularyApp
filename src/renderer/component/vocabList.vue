@@ -30,13 +30,9 @@
           <!-- <v-list-item> -->
               <!-- <v-list-item-title v-text="item"></v-list-item-title> -->
             <!-- <ul> -->
-              <v-list-item v-for="(item, i) in items" :key="i" v-text="item.text" @contextmenu="show" @mousedown.right="showRight(i)">
-                <div v-show = "item.edit == false">
-                  <label v-on:dblclick = "item.edit = true"> {{item.text}} </label>
-                </div>
-                <input v-show = "item.edit == true" v-model = "item.text"
-                v-on:blur= "item.edit=false; $emit('update')"
-                @keyup.enter = "item.edit=false; $emit('update')">
+              <v-list-item v-for="(item, i) in items" :key="i" @contextmenu="show" @mousedown.right="showRight(i)" @click="clickOnNav">
+                <label v-if="i !== indexValue"> {{ item }} </label>
+                <input autofocus type = "text" v-if="i === indexValue" v-model = "newName">
               </v-list-item>
             <!-- </ul> -->
           <!-- </v-list-item-content> -->
@@ -57,7 +53,7 @@
         offset-y
       >
         <v-list>
-          <v-list-item v-for="(item, index) in itemsForMenu" :key="index">
+          <v-list-item v-for="(item, index2) in itemsForMenu" :key="index2">
             <v-btn text @click="clickOnMenu(item)">{{ item }}</v-btn>
             <!-- @update-value="updateVal" removed-->
           </v-list-item>
@@ -71,13 +67,11 @@
 export default {
   data () {
     return {
+      indexValue: -1,
+      newName: '',
       selectedItem: 0,
       editedItem: null,
-      items: [
-        {'text': 'list 1', 'edit': false},
-        {'text': 'list 2', 'edit': false},
-        {'text': 'list 3', 'edit': false}
-      ],
+      items: ['word list 1', 'word list 2'],
       showMenu: false,
       x: 0,
       y: 0,
@@ -93,6 +87,8 @@ export default {
       let reviseitems = this.items
       let length = this.items.length
       reviseitems.splice(length, 0, 'new list')
+      // this.selectedItem = length
+      // this.clickOnMenu('Rename')
     },
     remove () {
       console.log('remove')
@@ -112,6 +108,14 @@ export default {
     },
     clickOnMenu (item) {
       console.log(item)
+      if (item === 'Rename') {
+        console.log(this.selectedItem)
+        this.indexValue = this.selectedItem
+        console.log('this.indexValue', item)
+        console.log('this.indexValue', this.indexValue)
+        // this.indexValue = -1
+        // TODO receive the input from input tag and ewnew the array
+      }
     },
     showRight (i) {
       console.log(i)
@@ -120,6 +124,14 @@ export default {
     editTodo: function (item) {
       console.log(0)
       this.editedItem = item
+    },
+    clickOnNav () {
+      console.log(this.selectedItem)
+      console.log(this.items[this.selectedItem])
+      this.$emit('changeList', this.items[this.selectedItem])
+      console.log(222222222)
+      // TODO disable some time between
+      // it will break if switch too fast
     }
   }
 }
@@ -136,5 +148,9 @@ export default {
   margin: 0 auto;
   max-width: 600px;
   width: 100%;
+}
+
+#2i {
+  display: none;
 }
 </style>
