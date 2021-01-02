@@ -34,18 +34,18 @@
         <v-list-item-group v-model= "selectedItem" color="primary" class="list-group">
           <!-- <v-list-item v-for="(item, i) in items" :key="i"> -->
           <!-- <v-list-item v-for="(item, i) in items" :key="i" @contextmenu="show" @mousedown.right="showRight(i)"> -->
-          <!-- <v-list-item-content> -->
+          <!-- <v-list-item> -->
               <!-- <v-list-item-title v-text="item"></v-list-item-title> -->
-            <ul>
-              <li v-for="(item, i) in items" :key="i" v-text="item.text">
+            <!-- <ul> -->
+              <v-list-item v-for="(item, i) in items" :key="i" v-text="item.text">
                 <div v-show = "item.edit == false">
                   <label @dblclick = "item.edit = true"> {{item.text}} </label>
                 </div>
                 <input v-show = "item.edit == true" v-model = "item.text"
                 v-on:blur= "item.edit=false; $emit('update')"
                 @keyup.enter = "item.edit=false; $emit('update')">
-              </li>
-            </ul>
+              </v-list-item>
+            <!-- </ul> -->
           <!-- </v-list-item-content> -->
           <!-- </v-list-item> -->
         </v-list-item-group>

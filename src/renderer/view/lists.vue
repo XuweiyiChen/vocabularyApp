@@ -7,11 +7,11 @@
             <vocabList></vocabList>
           </v-col>
 
-          <v-col cols="9">
+          <v-col>
             <v-container fluid>
               <v-row>
-                <v-col cols="12" sm="12" md="6" offset-md="3">
-                  <v-card>
+                <v-col>
+                  <v-card >
                     <v-card-text style="height: 700px;" class="lighten-5 text-center">
                       <v-data-table
                         :headers="headerArray"
@@ -29,22 +29,13 @@
                     <v-dialog v-model="dialog" width="500">
                       <template v-slot:activator="{ on, attrs }">    
                         <v-card-text style="height: 50px; position: relative">
-                          <v-fab-transition>
-                            <v-btn
-                              color="black"
-                              outlined
-                              dark
-                              absolute
-                              top
-                              right
-                              fab
-                              x-small
-                              v-bind="attrs"
-                              v-on="on"
-                              > +
+                          <!-- <v-fab-transition> -->
+                            <v-btn color="black" fixed outlined dark absolute
+                              bottom right fab x-small v-bind="attrs" v-on="on"> 
+                              +
                               <!-- <v-icon>mdi-plus</v-icon> -->
                             </v-btn>
-                          </v-fab-transition>
+                          <!-- </v-fab-transition> -->
                         </v-card-text>
                       </template>
 
@@ -89,48 +80,26 @@
                 </v-col>
               </v-row>
             </v-container>
-
-            <!-- <v-col cols="12" sm="12">
-              <v-card height="400px">
-                <v-list subheader right>
-                  <v-subheader>Front</v-subheader>
-
-                  <v-col cols="6" sm="6">
-                    <v-text-field
-                      label="Solo"
-                      placeholder="Placeholder"
-                      solo
-                    ></v-text-field>
-                  </v-col>
-
-                  <v-subheader>Back</v-subheader>
-
-                  <v-col cols="12" sm="6">
-                    <v-text-field
-                      label="Solo"
-                      placeholder="Placeholder"
-                      solo
-                      height="100"
-                    ></v-text-field>
-                  </v-col>
-                </v-list>
-              </v-card>
-            </v-col> -->
           </v-col>
         </v-row>
-
-        <v-container class="grey lighten-5">
-          <v-row justify-space-between>
-            <v-col md="4">
-                <v-btn outlined>Stats</v-btn>
-            </v-col>
-
-            <v-col cols="3">
-              <v-btn outlined>Test</v-btn>
-            </v-col>
-          </v-row>
-        </v-container>
       </v-container>
+
+      <v-card>
+        <v-bottom-navigation fixed :value="value" color="teal" grow>
+          <v-btn>
+            <span>Stat</span>
+            <!-- <v-icon>history</v-icon> -->
+          </v-btn>
+          <v-btn>
+            <span></span>
+            <!-- <v-icon>favorite</v-icon> -->
+          </v-btn>
+          <v-btn>
+            <span>Test</span>
+            <!-- <v-icon>place</v-icon> -->
+          </v-btn>
+        </v-bottom-navigation>
+      </v-card>
     </v-app>
   </div>
 </template>
@@ -151,6 +120,7 @@
     data () {
       return {
         dialog: false,
+        value: 1,
         vocabs: [
           {front: 'abash', back: '使尴尬，使羞愧', due: '11/11/2020', memory: 'weak'}, // color icon <--- memory  sort by col
           {front: 'abate', back: '减轻, 减少, 停止', due: '11/11/2020', memory: 'good'},
