@@ -137,12 +137,12 @@
       }
     },
     methods: {
-      saveFile () {
+      saveFile (path) {
         const fs = require('fs')
         let data = JSON.stringify(this.vocabs)
         console.log(data)
         try {
-          fs.writeFileSync('./src/renderer/vocajson/word_list_1.json', data)
+          fs.writeFileSync(path, data)
         } catch (e) {
           console.log(e)
         }
@@ -159,11 +159,15 @@
         this.dialog = false
         let sentence = {front: this.front, back: this.back, due: this.due, memory: this.memory}
         // console.log(sentence)
+        let length = this.vocabs.length
         let newvocabs = this.vocabs
-        newvocabs[3] = sentence
+        newvocabs[length] = sentence
         // let data = JSON.parse(sentence)
         console.log(this.vocabs)
         this.$set(this.vocabs, newvocabs)
+        console.log(this.list)
+        let path = './src/renderer/vocajson/' + this.listname + '.json'
+        this.saveFile(path)
         // console.log(data)
       },
       listnameSet (newlistName) {

@@ -24,7 +24,7 @@
       <v-divider></v-divider>
   
       <v-list nav dense>
-        <v-list-item-group v-model= "selectedItem" color="primary" class="list-group">
+        <v-list-item-group mandatory v-model= "selectedItem" color="primary" class="list-group">
           <!-- <v-list-item v-for="(item, i) in items" :key="i"> -->
           <!-- <v-list-item v-for="(item, i) in items" :key="i" @contextmenu="show" @mousedown.right="showRight(i)"> -->
           <!-- <v-list-item> -->
@@ -154,9 +154,5 @@ export default {
   margin: 0 auto;
   max-width: 600px;
   width: 100%;
-}
-
-#2i {
-  display: none;
 }
 </style>
