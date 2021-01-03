@@ -32,7 +32,7 @@
             <!-- <ul> -->
               <v-list-item v-for="(item, i) in items" :key="i" @contextmenu="show" @mousedown.right="showRight(i)" @click="clickOnNav">
                 <label v-if="i !== indexValue"> {{ item }} </label>
-                <input autofocus type = "text" v-if="i === indexValue" v-model = "newName">
+                <input autofocus type = "text" v-if="i === indexValue" v-model = "newName" v-on:keyup.13="submit">
               </v-list-item>
             <!-- </ul> -->
           <!-- </v-list-item-content> -->
@@ -71,7 +71,7 @@ export default {
       newName: '',
       selectedItem: 0,
       editedItem: null,
-      items: ['word list 1', 'word list 2'],
+      items: ['word_list_1'],
       showMenu: false,
       x: 0,
       y: 0,
@@ -86,9 +86,9 @@ export default {
       console.log('Add')
       let reviseitems = this.items
       let length = this.items.length
-      reviseitems.splice(length, 0, 'new list')
-      // this.selectedItem = length
-      // this.clickOnMenu('Rename')
+      reviseitems.splice(length, 0, '')
+      this.selectedItem = length
+      this.clickOnMenu('Rename')
     },
     remove () {
       console.log('remove')
@@ -113,8 +113,6 @@ export default {
         this.indexValue = this.selectedItem
         console.log('this.indexValue', item)
         console.log('this.indexValue', this.indexValue)
-        // this.indexValue = -1
-        // TODO receive the input from input tag and renew the array
       }
     },
     showRight (i) {
@@ -132,6 +130,14 @@ export default {
       console.log(222222222)
       // TODO disable some time between
       // it will break if switch too fast
+    },
+    submit () {
+      let newItem = this.items
+      newItem[this.indexValue] = this.newName
+      // console.log(33333333)
+      // console.log(newItem)
+      this.newName = null
+      this.indexValue = -1
     }
   }
 }

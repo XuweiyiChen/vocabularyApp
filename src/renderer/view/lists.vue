@@ -114,10 +114,6 @@
       showSelect: true,
       isLoading: true
     },
-    mounted () {
-      // test purpose it will generate a data.json in src/renderer/vocajson
-      this.saveFile()
-    },
     data () {
       return {
         listname: null,
@@ -146,16 +142,16 @@
         let data = JSON.stringify(this.vocabs)
         console.log(data)
         try {
-          fs.writeFileSync('./src/renderer/vocajson/data.json', data)
+          fs.writeFileSync('./src/renderer/vocajson/word_list_1.json', data)
         } catch (e) {
           console.log(e)
         }
       },
-      readFile () {
+      readFile (path) {
         const fs = require('fs')
-        let rawdata = fs.readFileSync('./src/renderer/vocajson/data.json')
-        let student = JSON.parse(rawdata)
-        console.log(student)
+        let rawFetch = fs.readFileSync(path)
+        let jsonFetch = JSON.parse(rawFetch)
+        return jsonFetch
       },
       addWord () {
         console.log(this.front)
@@ -173,6 +169,34 @@
       listnameSet (newlistName) {
         this.listname = newlistName
         console.log(this.listname)
+        // TWO OPTIONS
+        const fs = require('fs')
+        let path = './src/renderer/vocajson/' + this.listname + '.json'
+        console.log('path')
+        console.log(path)
+        // (1) the file does not exist
+        // (2) the file do exist
+        try {
+          if (fs.existsSync(path)) {
+            // file exists
+            console.log('file exists')
+            let vocabJson = this.readFile(path)
+            this.vocabs = vocabJson
+            this.$set(this.vocabs, vocabJson)
+          } else {
+            // file does not exist
+            console.log('file does not exist')
+            // let newvocabs = this.vocabs
+            // let emptyJson = []
+            let emptyJson = []
+            this.vocabs = emptyJson
+            this.$set(this.vocabs, emptyJson)
+            console.log('this.vocabs')
+            console.log(this.vocabs)
+          }
+        } catch (err) {
+          console.error(err)
+        }
       }
     }
   }
