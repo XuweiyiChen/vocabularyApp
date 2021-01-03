@@ -1,112 +1,105 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <v-container class="grey lighten-5">
-        <v-row no-gutters>
-          <v-col cols="3">
-            <vocabList @changeList="listnameSet"></vocabList>
-          </v-col>
+      <BtmNav>
+        <Tab name = "Stats">
+          <Test></Test>
+        </Tab>
 
-          <v-col>
-            <v-container fluid>
-              <v-row>
-                <v-col>
-                  <v-card>
-                    <v-card-text style="height: 800px;" class="text-center">
-                      <v-data-table
-                        :headers="headerArray"
-                        :items="vocabs"
-                        :search="search"
-                        :hide-default-header="hideHeaders"
-                        :show-select="showSelect"
-                        :loading="isLoading"
-                        hide-default-footer
-                        item-key="name"
-                        class="elevation-1">
-                      </v-data-table>
-                    </v-card-text>
+        <Tab name = "Main" selected = "true">
+          <v-container class="grey lighten-5">
+            <v-row no-gutters>      
+              <VocabList @changeList="listnameSet"></VocabList>
 
-                    <v-dialog v-model="dialog" width="500">
-                      <template v-slot:activator="{ on, attrs }">    
-                        <v-card-text style="height: 50px; position: relative">
-                          <!-- <v-fab-transition> -->
-                            <v-btn id="hi" color="teal" fixed dark
-                              bottom right fab small v-bind="attrs" v-on="on"> 
-                              +
-                              <!-- <v-icon>mdi-plus</v-icon> -->
-                            </v-btn>
-                          <!-- </v-fab-transition> -->
-                        </v-card-text>
-                      </template>
-
+              <v-col>
+                <v-container fluid>
+                  <v-row>
+                    <v-col>
                       <v-card>
-                        <v-card-title class="subtitle-2 teal lighten-2"> : </v-card-title>
-
-                        <v-card-text>  
-                          <v-subheader class="subtitle-1 mt-lg-2">Front</v-subheader>
-<!-- ??mt -->
-                          <v-col cols="6" sm="6" flex>
-                            <v-text-field style="width: 400px;" label="" placeholder="enter text.." outlined class="shrink" v-model="front">
-                            </v-text-field>
-                          </v-col>
-
-                          <v-subheader class="subtitle-1">Back</v-subheader>
-
-                          <v-col cols="12" sm="6">
-                            <v-text-field style="width: 400px; height=100px;" label="" placeholder="enter text.." outlined class="shrink" v-model="back">
-                            </v-text-field>
-                          </v-col>
+                        <v-card-text style="height: 800px;" class="text-center">
+                          <v-data-table
+                            :headers="headerArray"
+                            :items="vocabs"
+                            :search="search"
+                            :hide-default-header="hideHeaders"
+                            :show-select="showSelect"
+                            :loading="isLoading"
+                            hide-default-footer
+                            item-key="name"
+                            class="elevation-1">
+                          </v-data-table>
                         </v-card-text>
-                            
-                        <v-divider></v-divider>
 
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn
-                            color="primary"
-                            text
-                            @click="addWord"
-                          >
-                            Done
-                          </v-btn>
-                        </v-card-actions>
+                        <v-dialog v-model="dialog" width="500">
+                          <template v-slot:activator="{ on, attrs }">    
+                            <v-card-text style="height: 50px; position: relative">
+                              <!-- <v-fab-transition> -->
+                                <v-btn id="hi" color="teal" fixed dark
+                                  bottom right fab small v-bind="attrs" v-on="on"> 
+                                  +
+                                  <!-- <v-icon>mdi-plus</v-icon> -->
+                                </v-btn>
+                              <!-- </v-fab-transition> -->
+                            </v-card-text>
+                          </template>
+
+                          <v-card>
+                            <v-card-title class="subtitle-2 teal lighten-2"> : </v-card-title>
+
+                            <v-card-text>  
+                              <v-subheader class="subtitle-1 mt-lg-2">Front</v-subheader>
+                              <v-col cols="6" sm="6" flex>
+                                <v-text-field style="width: 400px;" label="" placeholder="enter text.." outlined class="shrink" v-model="front">
+                                </v-text-field>
+                              </v-col>
+
+                              <v-subheader class="subtitle-1">Back</v-subheader>
+
+                              <v-col cols="12" sm="6">
+                                <v-text-field style="width: 400px; height=100px;" label="" placeholder="enter text.." outlined class="shrink" v-model="back">
+                                </v-text-field>
+                              </v-col>
+                            </v-card-text>
+                                
+                            <v-divider></v-divider>
+
+                            <v-card-actions>
+                              <v-spacer></v-spacer>
+                              <v-btn color="primary" text @click="addWord">
+                                Done
+                              </v-btn>
+                            </v-card-actions>
+                          </v-card>
+                        </v-dialog>
                       </v-card>
-                    </v-dialog>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-col>
-        </v-row>
-      </v-container>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-col>
+            </v-row>
+          </v-container>
+        </Tab>
 
-      <v-card>
-        <v-bottom-navigation fixed :value="value" color="teal" grow>
-          <v-btn>
-            <span>Stat</span>
-            <!-- <v-icon>history</v-icon> -->
-            <!-- <v-btn color="teal" dark fab x-small></v-btn> -->
-          </v-btn>
-          <v-btn>
-            <span></span>
-            <!-- <v-icon>favorite</v-icon> -->
-          </v-btn>
-          <v-btn>
-            <span>Test</span>
-            <!-- <v-icon>place</v-icon> -->
-          </v-btn>
-        </v-bottom-navigation>
-      </v-card>
+        <Tab name = "Test">
+          <Test></Test>
+        </Tab>
+      </BtmNav>
     </v-app>
   </div>
 </template>
 
 <script>
-  import vocabList from '../component/vocabList'
+  import VocabList from '../component/vocabList'
+  import BtmNav from '../component/btmNav'
+  import Tab from '../component/Tab'
+  import Test from '../component/test'
 
   export default {
     components: {
-      vocabList
+      VocabList,
+      BtmNav,
+      Tab,
+      Test
     },
     props: {
       search: true,
@@ -116,6 +109,7 @@
     },
     data () {
       return {
+        tabs: ['a', 'b', 'c'],
         listname: null,
         dialog: false,
         value: 1,
@@ -123,11 +117,11 @@
         back: null,
         due: '11/11/2020',
         memory: 'weak',
-        vocabs: [
-          {front: 'abash', back: '使尴尬，使羞愧', due: '11/11/2020', memory: 'weak'}, // color icon <--- memory  sort by col
-          {front: 'abate', back: '减轻, 减少, 停止', due: '11/11/2020', memory: 'good'},
-          {front: 'abbreviate', back: '缩写, 缩短', due: '11/11/2020', memory: 'weak'}
-        ],
+        // vocabs: [
+        //   {front: 'abash', back: '使尴尬，使羞愧', due: '11/11/2020', memory: 'weak'}, // color icon <--- memory  sort by col
+        //   {front: 'abate', back: '减轻, 减少, 停止', due: '11/11/2020', memory: 'good'},
+        //   {front: 'abbreviate', back: '缩写, 缩短', due: '11/11/2020', memory: 'weak'}
+        // ],
         headerArray: [
           {text: 'Front', align: 'start', sortable: false, value: 'front'},
           {text: 'Back', value: 'back'},
@@ -136,6 +130,10 @@
         ]
       }
     },
+    // created () {
+    // this.tabs = this.$children
+    // this.tabs = ['a', 'b', 'c']
+    // },
     methods: {
       saveFile (path) {
         const fs = require('fs')

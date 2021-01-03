@@ -1,4 +1,5 @@
 <template>
+<v-col cols="3">
   <v-card height="900px" >
     <v-navigation-drawer permanent>
       <v-list>
@@ -10,13 +11,11 @@
           </v-list-item-content>
 
           <v-list-item-content style="height: 0px; position: relative">
-            <!-- <v-fab-transition> -->
               <v-btn color="teal" absolute dark
                 right x-small @click="add"> 
                 +
                 <!-- <v-icon>mdi-plus</v-icon> -->
               </v-btn>
-            <!-- </v-fab-transition> -->
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -61,6 +60,7 @@
       </v-menu>
     </v-navigation-drawer>
   </v-card>
+</v-col>
 </template>
 
 <script>
