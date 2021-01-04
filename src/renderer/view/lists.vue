@@ -3,7 +3,7 @@
     <v-app id="inspire">
       <BtmNav>
         <Tab name = "Stats">
-          <Test></Test>
+          <Stats></Stats>
         </Tab>
 
         <Tab name = "Main" selected = "true">
@@ -93,13 +93,15 @@
   import BtmNav from '../component/btmNav'
   import Tab from '../component/Tab'
   import Test from '../component/test'
+  import Stats from '../component/stats'
 
   export default {
     components: {
       VocabList,
       BtmNav,
       Tab,
-      Test
+      Test,
+      Stats
     },
     props: {
       search: true,
@@ -117,11 +119,11 @@
         back: null,
         due: '11/11/2020',
         memory: 'weak',
-        // vocabs: [
-        //   {front: 'abash', back: '使尴尬，使羞愧', due: '11/11/2020', memory: 'weak'}, // color icon <--- memory  sort by col
-        //   {front: 'abate', back: '减轻, 减少, 停止', due: '11/11/2020', memory: 'good'},
-        //   {front: 'abbreviate', back: '缩写, 缩短', due: '11/11/2020', memory: 'weak'}
-        // ],
+        vocabs: [
+          {front: 'abash', back: '使尴尬，使羞愧', due: '11/11/2020', memory: 'weak'}, // color icon <--- memory  sort by col
+          {front: 'abate', back: '减轻, 减少, 停止', due: '11/11/2020', memory: 'good'},
+          {front: 'abbreviate', back: '缩写, 缩短', due: '11/11/2020', memory: 'weak'}
+        ],
         headerArray: [
           {text: 'Front', align: 'start', sortable: false, value: 'front'},
           {text: 'Back', value: 'back'},
@@ -130,10 +132,6 @@
         ]
       }
     },
-    // created () {
-    // this.tabs = this.$children
-    // this.tabs = ['a', 'b', 'c']
-    // },
     methods: {
       saveFile (path) {
         const fs = require('fs')

@@ -1,9 +1,9 @@
 <template>
   <article>
-    <v-card>
-      <v-bottom-navigation fixed :value="value" color="teal" grow class="tabs">
+    <v-card class="tabs">
+      <v-bottom-navigation fixed color="teal" grow>
         <v-btn v-for="(tab,index) in tabs" :key="index">
-          <span :class="{'is-active' : tab.isActive}" @click="selectTab(tab)">{{tab.name}}</span>
+          <span :class="{'is-active' : tab.isActive}" v-on:click="selectTab(tab)">{{tab.name}}</span>
         </v-btn>
       </v-bottom-navigation>
     </v-card>

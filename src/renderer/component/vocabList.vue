@@ -27,11 +27,11 @@
           <!-- <v-list-item v-for="(item, i) in items" :key="i"> -->
           <!-- <v-list-item v-for="(item, i) in items" :key="i" @contextmenu="show" @mousedown.right="showRight(i)"> -->
           <!-- <v-list-item> -->
-              <!-- <v-list-item-title v-text="item"></v-list-item-title> -->
+            <!-- <v-list-item-title v-text="item"></v-list-item-title> -->
             <!-- <ul> -->
               <v-list-item v-for="(item, i) in items" :key="i" @contextmenu="show" @mousedown.right="showRight(i)" @click="clickOnNav">
-                <label v-if="i !== indexValue"> {{ item }} </label>
-                <input autofocus type = "text" v-if="i === indexValue" v-model = "newName" v-on:keyup.13="submit">
+                <label v-if="i !== indexValue">{{item}}</label>
+                <input autofocus type = "text" v-if="i === indexValue" v-model="newName" v-on:keyup.13="submit">
               </v-list-item>
             <!-- </ul> -->
           <!-- </v-list-item-content> -->
@@ -44,13 +44,7 @@
           <!-- <v-btn small outlined id="remove" color="error" @click="remove">Remove</v-btn> -->
       </v-row>
 
-      <v-menu
-        v-model="showMenu"
-        :position-x="x"
-        :position-y="y"
-        absolute
-        offset-y
-      >
+      <v-menu v-model="showMenu" :position-x="x" :position-y="y" absolute offset-y>
         <v-list>
           <v-list-item v-for="(item, index2) in itemsForMenu" :key="index2">
             <v-btn text @click="clickOnMenu(item)">{{ item }}</v-btn>
