@@ -3,7 +3,9 @@
     <v-card class="tabs">
       <v-bottom-navigation fixed color="teal" grow>
         <v-btn v-for="(tab,index) in tabs" :key="index">
-          <span :class="{'is-active' : tab.isActive}" v-on:click="selectTab(tab)">{{tab.name}}</span>
+          <span :class="{'is-active' : tab.isActive}" v-on:click="selectTab(tab)">
+            <router-link to="/${tab.name}">{{tab.name}}</router-link>
+          </span>
         </v-btn>
       </v-bottom-navigation>
     </v-card>
@@ -24,6 +26,7 @@
       selectTab (selectedTab) {
         this.tabs.forEach(tab => {
           tab.isActive = tab.name === selectedTab.name
+          // this.$router.push('/' + tab.name).catch(() => {})
         })
       }
     },
