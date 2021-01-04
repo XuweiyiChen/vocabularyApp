@@ -1,107 +1,87 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <BtmNav>
-        <Tab name = "Stats">
-          <Stats></Stats>
-        </Tab>
+      <v-container class="grey lighten-5">
+        <v-row no-gutters>      
+          <VocabList @changeList="listnameSet"></VocabList>
 
-        <Tab name = "Main" selected = "true">
-          <v-container class="grey lighten-5">
-            <v-row no-gutters>      
-              <VocabList @changeList="listnameSet"></VocabList>
+          <v-col>
+            <v-container fluid>
+              <v-row>
+                <v-col>
+                  <v-card>
+                    <v-card-text style="height: 800px;" class="text-center">
+                      <v-data-table
+                        :headers="headerArray"
+                        :items="vocabs"
+                        :search="search"
+                        :hide-default-header="hideHeaders"
+                        :show-select="showSelect"
+                        :loading="isLoading"
+                        hide-default-footer
+                        item-key="name"
+                        class="elevation-1">
+                      </v-data-table>
+                    </v-card-text>
 
-              <v-col>
-                <v-container fluid>
-                  <v-row>
-                    <v-col>
-                      <v-card>
-                        <v-card-text style="height: 800px;" class="text-center">
-                          <v-data-table
-                            :headers="headerArray"
-                            :items="vocabs"
-                            :search="search"
-                            :hide-default-header="hideHeaders"
-                            :show-select="showSelect"
-                            :loading="isLoading"
-                            hide-default-footer
-                            item-key="name"
-                            class="elevation-1">
-                          </v-data-table>
+                    <v-dialog v-model="dialog" width="500">
+                      <template v-slot:activator="{ on, attrs }">    
+                        <v-card-text style="height: 50px; position: relative">
+                          <!-- <v-fab-transition> -->
+                            <v-btn id="hi" color="teal" fixed dark
+                              bottom right fab small v-bind="attrs" v-on="on"> 
+                              +
+                              <!-- <v-icon>mdi-plus</v-icon> -->
+                            </v-btn>
+                          <!-- </v-fab-transition> -->
                         </v-card-text>
+                      </template>
 
-                        <v-dialog v-model="dialog" width="500">
-                          <template v-slot:activator="{ on, attrs }">    
-                            <v-card-text style="height: 50px; position: relative">
-                              <!-- <v-fab-transition> -->
-                                <v-btn id="hi" color="teal" fixed dark
-                                  bottom right fab small v-bind="attrs" v-on="on"> 
-                                  +
-                                  <!-- <v-icon>mdi-plus</v-icon> -->
-                                </v-btn>
-                              <!-- </v-fab-transition> -->
-                            </v-card-text>
-                          </template>
+                      <v-card>
+                        <v-card-title class="subtitle-2 teal lighten-2"> : </v-card-title>
 
-                          <v-card>
-                            <v-card-title class="subtitle-2 teal lighten-2"> : </v-card-title>
+                        <v-card-text>  
+                          <v-subheader class="subtitle-1 mt-lg-2">Front</v-subheader>
+                          <v-col cols="6" sm="6" flex>
+                            <v-text-field style="width: 400px;" label="" placeholder="enter text.." outlined class="shrink" v-model="front">
+                            </v-text-field>
+                          </v-col>
 
-                            <v-card-text>  
-                              <v-subheader class="subtitle-1 mt-lg-2">Front</v-subheader>
-                              <v-col cols="6" sm="6" flex>
-                                <v-text-field style="width: 400px;" label="" placeholder="enter text.." outlined class="shrink" v-model="front">
-                                </v-text-field>
-                              </v-col>
+                          <v-subheader class="subtitle-1">Back</v-subheader>
 
-                              <v-subheader class="subtitle-1">Back</v-subheader>
+                          <v-col cols="12" sm="6">
+                            <v-text-field style="width: 400px; height=100px;" label="" placeholder="enter text.." outlined class="shrink" v-model="back">
+                            </v-text-field>
+                          </v-col>
+                        </v-card-text>
+                            
+                        <v-divider></v-divider>
 
-                              <v-col cols="12" sm="6">
-                                <v-text-field style="width: 400px; height=100px;" label="" placeholder="enter text.." outlined class="shrink" v-model="back">
-                                </v-text-field>
-                              </v-col>
-                            </v-card-text>
-                                
-                            <v-divider></v-divider>
-
-                            <v-card-actions>
-                              <v-spacer></v-spacer>
-                              <v-btn color="primary" text @click="addWord">
-                                Done
-                              </v-btn>
-                            </v-card-actions>
-                          </v-card>
-                        </v-dialog>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn color="primary" text @click="addWord">
+                            Done
+                          </v-btn>
+                        </v-card-actions>
                       </v-card>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-col>
-            </v-row>
-          </v-container>
-        </Tab>
-
-        <Tab name = "Test">
-          <Test></Test>
-        </Tab>
-      </BtmNav>
+                    </v-dialog>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-app>
   </div>
 </template>
 
 <script>
   import VocabList from '../component/vocabList'
-  import BtmNav from '../component/btmNav'
-  import Tab from '../component/Tab'
-  import Test from '../component/test'
-  import Stats from '../component/stats'
 
   export default {
     components: {
-      VocabList,
-      BtmNav,
-      Tab,
-      Test,
-      Stats
+      VocabList
     },
     props: {
       search: true,

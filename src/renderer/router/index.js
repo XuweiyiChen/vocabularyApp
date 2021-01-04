@@ -3,8 +3,8 @@ import Router from 'vue-router'
 // import vocabularyList from '../view/vocabulary'
 import lists from '../view/lists'
 // import vocabList from '../component/vocabList.vue'
-import Test from '../component/test'
-import Stats from '../component/stats'
+import Test from '../view/test'
+import Stats from '../view/stats'
 
 Vue.use(Router)
 
