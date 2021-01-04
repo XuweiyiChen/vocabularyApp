@@ -1,19 +1,14 @@
 <template>
   <v-app>
-    <v-main> 
-      <BtmNav>
-        <Tab name = "Stats">
-          <Stats></Stats>
-        </Tab>
+    <v-main>
+      <v-card class="tabs">
+        <v-bottom-navigation fixed color="teal" grow>
+          <v-btn><router-link to="/stats">stats</router-link></v-btn>
+          <v-btn><router-link to="/">main</router-link></v-btn>
+          <v-btn><router-link to="/test">test</router-link></v-btn>
+        </v-bottom-navigation>
+      </v-card>
 
-        <Tab name = "Main" selected = "true">
-          <List></List>
-        </Tab>
-
-        <Tab name = "Test">
-          <Test></Test>
-        </Tab>
-      </BtmNav>
       <router-view></router-view>
     </v-main>
   </v-app>

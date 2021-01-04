@@ -1,6 +1,6 @@
 <template>
   <article>
-    <v-card class="tabs">
+    <!-- <v-card class="tabs">
       <v-bottom-navigation fixed color="teal" grow>
         <v-btn v-for="(tab,index) in tabs" :key="index">
           <span :class="{'is-active' : tab.isActive}" v-on:click="selectTab(tab)">
@@ -8,7 +8,7 @@
           </span>
         </v-btn>
       </v-bottom-navigation>
-    </v-card>
+    </v-card> -->
     <section class="tabs-details">
       <slot></slot>
     </section>
